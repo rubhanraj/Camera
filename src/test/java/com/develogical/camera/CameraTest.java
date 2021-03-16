@@ -15,11 +15,24 @@ public class CameraTest {
         verify(sensor).powerUp();
     }
     @Test
-    public void switchingTheCameraOnPowersDownTheSensor() {
+    public void switchingTheCameraOffPowersDownTheSensor() {
         Sensor sensor = mock(Sensor.class);
         Camera underTest = new Camera(sensor);
         underTest.powerOff();
 
         verify(sensor).powerDown();
+    }
+
+    //pressing the shutter with the power on copies data from the sensor to the memory card
+    @Test
+    public void whenPressingShutterWithPowerOnShouldCopyData() {
+        Sensor sensor = mock(Sensor.class);
+        MemoryCard memoryCard = mock(MemoryCard.class);
+        Camera underTest = new Camera(sensor);
+        underTest.powerOn();
+        underTest.pressShutter();
+
+        verify(sensor).readData();
+
     }
 }
