@@ -2,7 +2,10 @@ package com.develogical.camera;
 
 public class Camera {
 
-    public void pressShutter() {
+	public Camera(Sensor sensor) {
+	}
+
+	public void pressShutter() {
         // not implemented
     }
 
