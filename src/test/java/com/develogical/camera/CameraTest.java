@@ -24,6 +24,7 @@ public class CameraTest {
     }
 
     //pressing the shutter with the power on copies data from the sensor to the memory card
+    //Read Data
     @Test
     public void whenPressingShutterWithPowerOnShouldCopyData() {
         Sensor sensor = mock(Sensor.class);
@@ -33,6 +34,22 @@ public class CameraTest {
         underTest.pressShutter();
 
         verify(sensor).readData();
+
+    }
+
+    //pressing the shutter with the power on copies data from the sensor to the memory card
+    //Write Data
+    @Test
+    public void whenPressingShutterWithPowerOnShouldWriteData() {
+        WriteCompleteListener writeCompleteListener = mock(WriteCompleteListener.class);
+        Sensor sensor = mock(Sensor.class);
+        MemoryCard memoryCard = mock(MemoryCard.class);
+
+        Camera underTest = new Camera(sensor);
+        underTest.powerOn();
+        underTest.pressShutter();
+
+        verify(memoryCard).write(sensor.readData(), writeCompleteListener);
 
     }
 }
